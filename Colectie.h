@@ -1,8 +1,8 @@
 #pragma once
 
-#define NULL_TELEM -1
+#define NULL_TELEM -80000
 typedef int TElem;
-#define MAX 3000001
+#define MAX 3000022
 
 class IteratorColectie;
 
@@ -14,22 +14,16 @@ private:
 	
 	//reprezentare folosind o TD - rezolvare coliziuni prin liste intrepatrunse
 	int m; //numarul de locatii din tabela de dispersie
-	TElem e[MAX]; //vectorul elementelor - vector static
-	int urm[MAX]; //vectorul legaturilor
+	TElem* e; //vectorul elementelor
+	int* urm; //vectorul legaturilor
 	int primLiber; // locatia primei pozitii libere din tabela
 
+	int len;
 
 	// actualizare primLiber
-	void Colectie::actPrimLiber()
-	{
-		primLiber++;
-		while (primLiber < m && e[primLiber] != -1)
-			primLiber++;
-	}
+	void actPrimLiber();
 	//functia de dispersie
-	int d(TElem x);
-
-
+	int d(TElem x) const;
 
 public:
 		//constructorul implicit

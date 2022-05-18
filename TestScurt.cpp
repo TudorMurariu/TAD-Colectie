@@ -32,5 +32,34 @@ void testAll() { //apelam fiecare functie sa vedem daca exista
 	while (ic.valid()) {
 		TElem e = ic.element();
 		ic.urmator();
-	}	 
+	}
+
+}
+
+
+void test_new()
+{
+	Colectie c;
+	assert(c.vida() == true);
+	assert(c.dim() == 0);
+	// adaugam niste elemente
+	c.adauga(5);
+	c.adauga(1);
+	c.adauga(10);
+	c.adauga(10);
+	c.adauga(10);
+	c.adauga(5);
+	c.adauga(5);
+	c.adauga(4);
+	c.adauga(1);
+	c.adauga(13);
+	c.adauga(13);
+	c.adauga(13);
+	c.adauga(13);
+	c.adauga(13);
+	c.adauga(17);
+	assert(c.elementeCuFrecventaData(3) == 2);
+	assert(c.elementeCuFrecventaData(1) == 2);
+	assert(c.elementeCuFrecventaData(2) == 1);
+	assert(c.vida() == false);
 }

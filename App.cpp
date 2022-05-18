@@ -5,6 +5,8 @@ using namespace std;
 
 
 int main() {
+	test_new();
+	cout << "gata test nou\n";
 	testAll();
 	cout << "gata testALL\n";
 	testAllExtins();

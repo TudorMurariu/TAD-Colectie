@@ -40,11 +40,14 @@ Colectie::Colectie() {
 
 	e = new TElem[m];
 	urm = new int[m];
+	frecv = new int[m];
+	frecv_neg = new int[m];
 
 	//se initializeaza vectorii
 	for (int i = 0; i < m; i++) {
 		e[i] = NULL_TELEM; // consideram ca elementul e intreg
 		urm[i] = -1;
+		frecv[i] = 0;
 	}
 	//initializare primLIber
 	primLiber = 0;
@@ -62,6 +65,10 @@ void Colectie::adauga(TElem elem) {
 	{
 		e[i] = elem;	// adaugam elementul
 		len++;
+		if (elem > 0)
+			frecv[elem]++;
+		else
+			frecv_neg[-elem]++;
 		if (i == primLiber)
 			actPrimLiber();	// actualizam primLiber, daca este nevoie
 		return;
@@ -83,6 +90,10 @@ void Colectie::adauga(TElem elem) {
 	urm[j] = primLiber;
 	actPrimLiber();
 	len++;
+	if (elem > 0)
+		frecv[elem]++;
+	else
+		frecv_neg[-elem]++;
 }
 
 /// caz favoranil : Teta(1)
@@ -140,6 +151,10 @@ bool Colectie::sterge(TElem elem) {
 		primLiber = i;
 
 	len--;
+	if (elem > 0)
+		frecv[elem]--;
+	else
+		frecv_neg[-elem]--;
 	return true;
 }
 
@@ -213,4 +228,19 @@ Colectie::~Colectie() {
 	delete[] urm;
 }
 
+// Teta(m)  sau 2*m
+int Colectie::elementeCuFrecventaData(int frecventa) const
+{
+	// frecventa trebuie sa fie un numar pozitiv mai mare decat 0
+	if (frecventa <= 0)
+		throw exception();
 
+	int count = 0;
+	for (int i = 0; i < m; i++)
+		if (frecv[i] == frecventa)
+			count++;
+	for(int i = -m;i<0;i++)
+		if (frecv_neg[-i] == frecventa)
+			count++;
+	return count;
+}

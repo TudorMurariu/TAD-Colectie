@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define NULL_TELEM -80000
 typedef int TElem;
@@ -19,6 +19,9 @@ private:
 	int primLiber; // locatia primei pozitii libere din tabela
 
 	int len;
+
+	int* frecv;
+	int* frecv_neg;
 
 	// actualizare primLiber
 	void actPrimLiber();
@@ -55,5 +58,7 @@ public:
 		// destructorul colectiei
 		~Colectie();
 
+		// returneaza nr de elemente care apar de frecventa ori
+		int elementeCuFrecventaData(int frecventa) const;
 };
 
